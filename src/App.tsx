@@ -40,7 +40,7 @@ function App (): JSX.Element {
         {id: todoListId_1, title: "What to learn", filter: "all"},
         {id: todoListId_2, title: "What to buy", filter: "all"},
     ])
-    const [isDarkMode, setDarkMode] = useState<boolean>(false)
+    const [isDarkMode, setDarkMode] = useState<boolean>(true)
     const [tasks, setTasks] = useState<TasksStateType>({
         [todoListId_1]: [
             {id: v1(), title: "HTML & CSS", isDone: true},
