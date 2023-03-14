@@ -1,11 +1,8 @@
 import React, {ChangeEvent, FC} from 'react';
-import {TaskType} from './TodoList';
-import EditableSpan from './EditableSpan';
-import List from '@mui/material/List';
-import IconButton from '@mui/material/IconButton';
+import {TaskType} from "./TodoList";
+import EditableSpan from "./EditableSpan";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import ListItem from '@mui/material/ListItem';
-import Checkbox from '@mui/material/Checkbox';
+import {Checkbox, IconButton, List, ListItem} from "@mui/material";
 
 type TasksListPropsType = {
     todoListId: string
@@ -27,37 +24,31 @@ const TasksList: FC<TasksListPropsType> = (props): JSX.Element => {
                 props.changeTaskTitle(task.id, title, props.todoListId)
             return (
                 <ListItem
-                    disableGutters={true}
+                    key={task.id}
+                    disableGutters
                     divider
                     secondaryAction={
                         <IconButton
-                            size={'small'}
-                            color={'secondary'}
+                            size={"small"}
+                            onClick={removeTaskHandler}
+                            color={"secondary"}
                         >
-                            <HighlightOffIcon onClick={removeTaskHandler}/>
+                            <HighlightOffIcon />
                         </IconButton>
                     }
-                    key={task.id}>
+                >
                     <Checkbox
-                        size={'small'}
+                        size={"small"}
                         checked={task.isDone}
                         onChange={changeTaskStatusHandler}
                     />
                     <EditableSpan title={task.title} spanClasses={taskClasses} changeTitle={changeTaskTitleHandler}/>
-                    {/*<button onClick={removeTaskHandler}>x</button>*/}
-                    {/*<IconButton*/}
-                    {/*size={'small'}*/}
-                    {/*color={'secondary'}*/}
-                    {/*>*/}
-                    {/*    <HighlightOffIcon onClick={removeTaskHandler}/>*/}
-                    {/*</IconButton>*/}
                 </ListItem>
             )
         })
         : <span>Your taskslist is empty</span>
     return (
-        <List
-        disablePadding={false}>
+        <List disablePadding={false}>
             {tasksItems}
         </List>
     );

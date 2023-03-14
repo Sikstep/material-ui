@@ -1,12 +1,10 @@
-import React, {FC} from 'react';
-import TasksList from './TasksList';
-import {FilterValuesType} from './App';
-import AddItemForm from './AddItemForm';
-import EditableSpan from './EditableSpan';
-import Button from '@mui/material/Button';
-import {IconButton} from '@mui/material';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import Typography from '@mui/material/Typography';
+import React, {ChangeEvent, FC, RefObject, useRef, useState, KeyboardEvent} from 'react';
+import TasksList from "./TasksList";
+import {FilterValuesType} from "./App";
+import AddItemForm from "./AddItemForm";
+import EditableSpan from "./EditableSpan";
+import {Button, IconButton, Typography} from "@mui/material";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 
 type TodoListPropsType = {
@@ -40,23 +38,23 @@ const TodoList: FC<TodoListPropsType> = (props) => {
     const changeTodoListTitle = (title: string) => props.changeTodoListTitle(title, props.todoListId)
 
     return (
-        <div className={'todolist'}>
+        <div className={"todolist"}>
             <Typography
-                variant={'h5'}
-                align={'center'}
-                fontWeight={'bold'}
+                variant="h5"
+                align="center"
+                fontWeight="bold"
                 gutterBottom
             >
-                <EditableSpan title={props.title} changeTitle={changeTodoListTitle}/>
-                {/*<button onClick={removeTodoList}>x</button>*/}
+                <EditableSpan title={props.title} changeTitle={changeTodoListTitle} />
                 <IconButton
-                    size={'small'}
-                    color={'secondary'}
+                    size={"small"}
+                    onClick={removeTodoList}
+                    color={"secondary"}
                 >
-                    <HighlightOffIcon onClick={removeTodoList}/>
+                    <HighlightOffIcon />
                 </IconButton>
             </Typography>
-            <AddItemForm maxLengthUserMessage={15} addNewItem={addTask}/>
+            <AddItemForm maxLengthUserMessage={15} addNewItem={addTask} />
             <TasksList
                 todoListId={props.todoListId}
                 tasks={props.tasks}
@@ -66,25 +64,25 @@ const TodoList: FC<TodoListPropsType> = (props) => {
             />
             <div className="filter-btn-container">
                 <Button
-                    size={'small'}
-                    variant={'contained'}
+                    size="small"
+                    variant="contained"
                     disableElevation
-                    color={props.filter === 'all' ? 'secondary' : 'primary'}
+                    color={props.filter ==="all" ? "secondary" : "primary"}
                     onClick={handlerCreator('all')}
                 >All</Button>
                 <Button
-                    size={'small'}
-                    variant={'contained'}
+                    size="small"
+                    variant="contained"
                     disableElevation
-                    color={props.filter === 'active' ? 'secondary' : 'primary'}
-                    onClick={handlerCreator('active')}
+                    color={props.filter ==="active" ? "secondary" : "primary"}
+                    onClick={handlerCreator("active")}
                 >Active</Button>
                 <Button
-                    size={'small'}
-                    variant={'contained'}
+                    size="small"
+                    variant="contained"
                     disableElevation
-                    color={props.filter === 'completed' ? 'secondary' : 'primary'}
-                    onClick={handlerCreator('completed')}
+                    color={props.filter ==="completed" ? "secondary" : "primary"}
+                    onClick={handlerCreator("completed")}
                 >Completed</Button>
             </div>
         </div>
