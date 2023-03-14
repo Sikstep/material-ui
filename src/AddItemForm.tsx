@@ -1,6 +1,5 @@
 import React, {ChangeEvent, FC, KeyboardEvent, useState} from 'react';
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import {IconButton, TextField} from "@mui/material";
+import {IconButton, TextField} from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 type AddItemFormType = {
@@ -31,10 +30,10 @@ const AddItemForm: FC<AddItemFormType> = ({
     const onKeyDownAddItem = (e: KeyboardEvent<HTMLInputElement>)=> e.key === "Enter" && addItem()
 
 
-    const userErrorMessage = error && <div style={{color: "hotpink"}}>Title is required!</div>
+    // const userErrorMessage = error && <div style={{color: "hotpink"}}>Title is required!</div>
     const isUserMessageToLong: boolean = title.length > maxLengthUserMessage
     const isAddBtnDisabled = !title.length || isUserMessageToLong || error
-    const userMaxLengthMessage = isUserMessageToLong && <div style={{color: "hotpink"}}>Title is to long!</div>
+    // const userMaxLengthMessage = isUserMessageToLong && <div style={{color: "hotpink"}}>Title is to long!</div>
     const inputErrorClasses = error || isUserMessageToLong ? "input-error" : ""
     const onKeyDownHandler = isAddBtnDisabled ? undefined : onKeyDownAddItem
     const isInputShowError = isUserMessageToLong || error

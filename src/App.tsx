@@ -119,9 +119,9 @@ function App (): JSX.Element {
     const getFilteredTasks = (tasks: Array<TaskType>, filter: FilterValuesType):  Array<TaskType> => {
         switch (filter) {
             case "active":
-                return tasks.filter(t => t.isDone === false)
+                return tasks.filter(t => !t.isDone)
             case "completed":
-                return tasks.filter(t => t.isDone === true)
+                return tasks.filter(t => t.isDone)
             default:
                 return tasks
         }

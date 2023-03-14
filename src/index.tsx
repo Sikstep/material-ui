@@ -2,10 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
-import {lightGreen, orange} from "@mui/material/colors";
-
-
 
 
 const root = ReactDOM.createRoot(
