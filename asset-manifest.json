@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/material-ui/static/css/main.a8f3f5bb.css",
+    "main.js": "/material-ui/static/js/main.400a14de.js",
+    "index.html": "/material-ui/index.html",
+    "main.a8f3f5bb.css.map": "/material-ui/static/css/main.a8f3f5bb.css.map",
+    "main.400a14de.js.map": "/material-ui/static/js/main.400a14de.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a8f3f5bb.css",
+    "static/js/main.400a14de.js"
+  ]
+}
