@@ -6,6 +6,7 @@ import EditableSpan from './EditableSpan';
 import Button from '@mui/material/Button';
 import {IconButton} from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import Typography from '@mui/material/Typography';
 
 
 type TodoListPropsType = {
@@ -40,7 +41,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
 
     return (
         <div className={"todolist"}>
-            <h3>
+            <Typography variant={'h5'} align={'center'} fontWeight={'bold'}>
                 <EditableSpan title={props.title} changeTitle={changeTodoListTitle} />
                 {/*<button onClick={removeTodoList}>x</button>*/}
                 <IconButton
@@ -49,7 +50,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 >
                     <HighlightOffIcon onClick={removeTodoList}/>
                 </IconButton>
-            </h3>
+            </Typography>
             <AddItemForm maxLengthUserMessage={15} addNewItem={addTask} />
             <TasksList
                 todoListId={props.todoListId}
