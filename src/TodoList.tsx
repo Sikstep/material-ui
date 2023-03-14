@@ -1,8 +1,11 @@
-import React, {ChangeEvent, FC, RefObject, useRef, useState, KeyboardEvent} from 'react';
-import TasksList from "./TasksList";
-import {FilterValuesType} from "./App";
-import AddItemForm from "./AddItemForm";
-import EditableSpan from "./EditableSpan";
+import React, {FC} from 'react';
+import TasksList from './TasksList';
+import {FilterValuesType} from './App';
+import AddItemForm from './AddItemForm';
+import EditableSpan from './EditableSpan';
+import Button from '@mui/material/Button';
+import {IconButton} from '@mui/material';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 
 type TodoListPropsType = {
@@ -39,7 +42,13 @@ const TodoList: FC<TodoListPropsType> = (props) => {
         <div className={"todolist"}>
             <h3>
                 <EditableSpan title={props.title} changeTitle={changeTodoListTitle} />
-                <button onClick={removeTodoList}>x</button>
+                {/*<button onClick={removeTodoList}>x</button>*/}
+                <IconButton
+                    size={'small'}
+                    color={'secondary'}
+                >
+                    <HighlightOffIcon onClick={removeTodoList}/>
+                </IconButton>
             </h3>
             <AddItemForm maxLengthUserMessage={15} addNewItem={addTask} />
             <TasksList
@@ -50,18 +59,27 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 changeTaskTitle={props.changeTaskTitle}
             />
             <div className="filter-btn-container">
-                <button
-                    className={props.filter ==="all" ? "active-filter-btn" : "filter-btn"}
+                <Button
+                    size={'small'}
+                    variant={'contained'}
+                    disableElevation
+                    color={props.filter ==="all" ? 'secondary' : 'primary'}
                     onClick={handlerCreator('all')}
-                >All</button>
-                <button
-                    className={props.filter ==="active" ? "active-filter-btn" : "filter-btn"}
+                >All</Button>
+                <Button
+                    size={'small'}
+                    variant={'contained'}
+                    disableElevation
+                    color={props.filter ==="active" ? 'secondary' : 'primary'}
                     onClick={handlerCreator("active")}
-                >Active</button>
-                <button
-                    className={props.filter ==="completed" ? "active-filter-btn" : "filter-btn"}
+                >Active</Button>
+                <Button
+                    size={'small'}
+                    variant={'contained'}
+                    disableElevation
+                    color={props.filter ==="completed" ? 'secondary' : 'primary'}
                     onClick={handlerCreator("completed")}
-                >Completed</button>
+                >Completed</Button>
             </div>
         </div>
     );

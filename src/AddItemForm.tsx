@@ -1,4 +1,7 @@
 import React, {ChangeEvent, FC, KeyboardEvent, useState} from 'react';
+import {IconButton} from '@mui/material';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 type AddItemFormType = {
     maxLengthUserMessage: number
@@ -43,7 +46,15 @@ const AddItemForm: FC<AddItemFormType> = ({
                 onKeyDown={onKeyDownHandler}
                 className={inputErrorClasses}
             />
-            <button disabled={isAddBtnDisabled} onClick={addItem}>+</button>
+            {/*<button disabled={isAddBtnDisabled} onClick={addItem}>+</button>*/}
+            <IconButton
+                disabled={isAddBtnDisabled}
+                size={'small'}
+                color={'primary'}
+            >
+                <AddCircleOutlineIcon
+                    onClick={addItem}/>
+            </IconButton>
             {userMaxLengthMessage}
             {userErrorMessage}
         </div>
