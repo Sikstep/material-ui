@@ -1,13 +1,14 @@
-.App {
-  padding: 30px;
-  display: flex;
-}
+/*.App {*/
+/*  padding: 30px;*/
+/*  display: flex;*/
+/*}*/
 
-.App > div {
-  margin-right: 50px;
-}
+/*.App > div {*/
+/*  margin-right: 50px;*/
+/*}*/
 .todolist {
   height: max-content;
+  width: 250px;
   border: 2px solid #9c27b0;;
   border-radius:  5px;
   padding: 20px;

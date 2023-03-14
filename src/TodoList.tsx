@@ -40,9 +40,14 @@ const TodoList: FC<TodoListPropsType> = (props) => {
     const changeTodoListTitle = (title: string) => props.changeTodoListTitle(title, props.todoListId)
 
     return (
-        <div className={"todolist"}>
-            <Typography variant={'h5'} align={'center'} fontWeight={'bold'}>
-                <EditableSpan title={props.title} changeTitle={changeTodoListTitle} />
+        <div className={'todolist'}>
+            <Typography
+                variant={'h5'}
+                align={'center'}
+                fontWeight={'bold'}
+                gutterBottom
+            >
+                <EditableSpan title={props.title} changeTitle={changeTodoListTitle}/>
                 {/*<button onClick={removeTodoList}>x</button>*/}
                 <IconButton
                     size={'small'}
@@ -51,7 +56,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                     <HighlightOffIcon onClick={removeTodoList}/>
                 </IconButton>
             </Typography>
-            <AddItemForm maxLengthUserMessage={15} addNewItem={addTask} />
+            <AddItemForm maxLengthUserMessage={15} addNewItem={addTask}/>
             <TasksList
                 todoListId={props.todoListId}
                 tasks={props.tasks}
@@ -64,22 +69,22 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                     size={'small'}
                     variant={'contained'}
                     disableElevation
-                    color={props.filter ==="all" ? 'secondary' : 'primary'}
+                    color={props.filter === 'all' ? 'secondary' : 'primary'}
                     onClick={handlerCreator('all')}
                 >All</Button>
                 <Button
                     size={'small'}
                     variant={'contained'}
                     disableElevation
-                    color={props.filter ==="active" ? 'secondary' : 'primary'}
-                    onClick={handlerCreator("active")}
+                    color={props.filter === 'active' ? 'secondary' : 'primary'}
+                    onClick={handlerCreator('active')}
                 >Active</Button>
                 <Button
                     size={'small'}
                     variant={'contained'}
                     disableElevation
-                    color={props.filter ==="completed" ? 'secondary' : 'primary'}
-                    onClick={handlerCreator("completed")}
+                    color={props.filter === 'completed' ? 'secondary' : 'primary'}
+                    onClick={handlerCreator('completed')}
                 >Completed</Button>
             </div>
         </div>
