@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import './App.css';
-import TodoList, {TaskType} from "./TodoList";
-import {v1} from "uuid";
-import AddItemForm from "./AddItemForm";
+import TodoList, {TaskType} from './TodoList';
+import {v1} from 'uuid';
+import AddItemForm from './AddItemForm';
 import {
     AppBar,
     Button, Checkbox,
@@ -10,15 +10,15 @@ import {
     IconButton, Paper, ThemeProvider,
     Toolbar,
     Typography
-} from "@mui/material";
-import {Menu} from "@mui/icons-material";
-import {lightGreen, orange} from "@mui/material/colors";
+} from '@mui/material';
+import {Menu} from '@mui/icons-material';
+import {lightGreen, orange} from '@mui/material/colors';
 
 
 // CRUD
 // R - filter, sort, search
 
-export type FilterValuesType = "all" | "active" | "completed"
+export type FilterValuesType = 'all' | 'active' | 'completed'
 
 export type TodoListType = {
     id: string
@@ -32,26 +32,26 @@ type TasksStateType = {
 
 type TodoListsStateType = Array<TodoListType>
 
-function App (): JSX.Element {
+function App(): JSX.Element {
     //BLL:
     const todoListId_1 = v1()
     const todoListId_2 = v1()
 
     const [todoLists, setTodoLists] = useState<TodoListsStateType>([
-        {id: todoListId_1, title: "What to learn", filter: "all"},
-        {id: todoListId_2, title: "What to buy", filter: "all"},
+        {id: todoListId_1, title: 'What to learn', filter: 'all'},
+        {id: todoListId_2, title: 'What to buy', filter: 'all'},
     ])
     const [isDarkMode, setDarkMode] = useState<boolean>(true)
     const [tasks, setTasks] = useState<TasksStateType>({
         [todoListId_1]: [
-            {id: v1(), title: "HTML & CSS", isDone: true},
-            {id: v1(), title: "ES6 & TS", isDone: true},
-            {id: v1(), title: "REACT & REDUX", isDone: false},
+            {id: v1(), title: 'HTML & CSS', isDone: true},
+            {id: v1(), title: 'ES6 & TS', isDone: true},
+            {id: v1(), title: 'REACT & REDUX', isDone: false},
         ],
         [todoListId_2]: [
-            {id: v1(), title: "MILK", isDone: true},
-            {id: v1(), title: "BREAD", isDone: true},
-            {id: v1(), title: "MEAT", isDone: false},
+            {id: v1(), title: 'MILK', isDone: true},
+            {id: v1(), title: 'BREAD', isDone: true},
+            {id: v1(), title: 'MEAT', isDone: false},
         ]
     })
 
@@ -84,17 +84,17 @@ function App (): JSX.Element {
     }
     const changeTaskStatus = (taskId: string, newIsDone: boolean, todoListId: string) => {
         const tasksForUpdate: Array<TaskType> = tasks[todoListId]
-        const updatedTasks = tasksForUpdate.map(t => t.id === taskId ? {...t, isDone: newIsDone}: t)
+        const updatedTasks = tasksForUpdate.map(t => t.id === taskId ? {...t, isDone: newIsDone} : t)
         const copyTasks = {...tasks}
         copyTasks[todoListId] = updatedTasks
         setTasks(copyTasks)
         //
-        setTasks({...tasks, [todoListId]: tasks[todoListId].map(t => t.id === taskId ? {...t, isDone: newIsDone}: t)})
+        setTasks({...tasks, [todoListId]: tasks[todoListId].map(t => t.id === taskId ? {...t, isDone: newIsDone} : t)})
     }
     const changeTaskTitle = (taskId: string, newTitle: string, todoListId: string) => {
-        setTasks({...tasks, [todoListId]: tasks[todoListId].map(t => t.id === taskId ? {...t, title: newTitle}: t)})
+        setTasks({...tasks, [todoListId]: tasks[todoListId].map(t => t.id === taskId ? {...t, title: newTitle} : t)})
     }
-    const removeTodoList = (todoListId: string)=> {
+    const removeTodoList = (todoListId: string) => {
         setTodoLists(todoLists.filter(tl => tl.id !== todoListId))  // 2 tl
         //delete tasks[todoListId]
         const copyTasks = {...tasks}
@@ -106,7 +106,7 @@ function App (): JSX.Element {
         const newTodoList: TodoListType = {
             id: newTodoListId,
             title: title,
-            filter: "all"
+            filter: 'all'
         }
         setTodoLists([...todoLists, newTodoList])
         setTasks({...tasks, [newTodoListId]: []})
@@ -117,11 +117,11 @@ function App (): JSX.Element {
     const changeTodoListTitle = (title: string, todoListId: string) => {
         setTodoLists(todoLists.map(tl => tl.id === todoListId ? {...tl, title: title} : tl))
     }
-    const getFilteredTasks = (tasks: Array<TaskType>, filter: FilterValuesType):  Array<TaskType> => {
+    const getFilteredTasks = (tasks: Array<TaskType>, filter: FilterValuesType): Array<TaskType> => {
         switch (filter) {
-            case "active":
+            case 'active':
                 return tasks.filter(t => !t.isDone)
-            case "completed":
+            case 'completed':
                 return tasks.filter(t => t.isDone)
             default:
                 return tasks
@@ -132,7 +132,7 @@ function App (): JSX.Element {
             .filter)
         return (
             <Grid item>
-                <Paper sx={{p: "20px"}} elevation={8}>
+                <Paper sx={{p: '20px'}} elevation={8}>
                     <TodoList
                         key={tl.id}
                         todoListId={tl.id}
@@ -154,54 +154,54 @@ function App (): JSX.Element {
         )
     })
     //UI:
-    const mode = isDarkMode ?  "dark" : "light";
+    const mode = isDarkMode ? 'dark' : 'light';
 
     const newTheme = createTheme({
         palette: {
             mode: mode,
-            primary:  lightGreen,
+            primary: lightGreen,
             secondary: orange,
         }
     })
     return (
         <ThemeProvider theme={newTheme}>
-            <CssBaseline />
-                <div className="App">
-                    <AppBar position="static">
-                        <Toolbar>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="menu"
-                                sx={{mr: 2}}
-                            >
-                                <Menu/>
-                            </IconButton>
-                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                                TodoLists
-                            </Typography>
-                            <FormGroup>
-                                <FormControlLabel
-                                    control={<Checkbox
-                                        onChange={(e)=>setDarkMode(e.currentTarget.checked)} />}
-                                    label={isDarkMode ? "Light mode" : "Dark mode"}
-                                />
-                            </FormGroup>
+            <CssBaseline/>
+            <div className="App">
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{mr: 2}}
+                        >
+                            <Menu/>
+                        </IconButton>
+                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                            TodoLists
+                        </Typography>
+                        <FormGroup>
+                            <FormControlLabel
+                                control={<Checkbox
+                                    onChange={(e) => setDarkMode(e.currentTarget.checked)}/>}
+                                label={isDarkMode ? 'Light mode' : 'Dark mode'}
+                            />
+                        </FormGroup>
 
-                            <Button color="inherit">Login</Button>
-                        </Toolbar>
-                    </AppBar>
-                    <Container fixed>
-                        <Grid container sx={{p: "15px 0"}}>
-                            <AddItemForm maxLengthUserMessage={15} addNewItem={addTodoList} />
+                        <Button color="inherit">Login</Button>
+                    </Toolbar>
+                </AppBar>
+                <Container fixed>
+                    <Grid container sx={{p: '15px 0'}}>
+                        <AddItemForm maxLengthUserMessage={15} addNewItem={addTodoList}/>
 
-                        </Grid>
-                        <Grid container spacing={3}>
-                            {todoListsComponents}
-                        </Grid>
-                    </Container>
-                </div>
+                    </Grid>
+                    <Grid container spacing={3}>
+                        {todoListsComponents}
+                    </Grid>
+                </Container>
+            </div>
         </ThemeProvider>
     );
 }
