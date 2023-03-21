@@ -36,6 +36,7 @@ function App (): JSX.Element {
     //BLL:
     const todoListId_1 = v1()
     const todoListId_2 = v1()
+
     const [todoLists, setTodoLists] = useState<TodoListsStateType>([
         {id: todoListId_1, title: "What to learn", filter: "all"},
         {id: todoListId_2, title: "What to buy", filter: "all"},
@@ -53,11 +54,15 @@ function App (): JSX.Element {
             {id: v1(), title: "MEAT", isDone: false},
         ]
     })
+
     const removeTask = (taskId: string, todoListId: string) => {
+        // 1. Get next state
         const tasksForUpdate = tasks[todoListId]
         const updatedTasks = tasksForUpdate.filter(t => t.id !== taskId)
         const copyTasks = {...tasks}
         copyTasks[todoListId] = updatedTasks
+
+        // 2. Set new state
         setTasks(copyTasks)
         //
         setTasks({...tasks, [todoListId]: tasks[todoListId].filter(t => t.id !== taskId)})
@@ -89,8 +94,6 @@ function App (): JSX.Element {
     const changeTaskTitle = (taskId: string, newTitle: string, todoListId: string) => {
         setTasks({...tasks, [todoListId]: tasks[todoListId].map(t => t.id === taskId ? {...t, title: newTitle}: t)})
     }
-
-
     const removeTodoList = (todoListId: string)=> {
         setTodoLists(todoLists.filter(tl => tl.id !== todoListId))  // 2 tl
         //delete tasks[todoListId]
@@ -114,8 +117,6 @@ function App (): JSX.Element {
     const changeTodoListTitle = (title: string, todoListId: string) => {
         setTodoLists(todoLists.map(tl => tl.id === todoListId ? {...tl, title: title} : tl))
     }
-
-
     const getFilteredTasks = (tasks: Array<TaskType>, filter: FilterValuesType):  Array<TaskType> => {
         switch (filter) {
             case "active":
@@ -126,8 +127,6 @@ function App (): JSX.Element {
                 return tasks
         }
     }
-
-
     const todoListsComponents = todoLists.map(tl => {
         const filteredTasks: Array<TaskType> = getFilteredTasks(tasks[tl.id], tl
             .filter)
@@ -155,7 +154,8 @@ function App (): JSX.Element {
         )
     })
     //UI:
-    const mode = isDarkMode ?  "dark" : "light"
+    const mode = isDarkMode ?  "dark" : "light";
+
     const newTheme = createTheme({
         palette: {
             mode: mode,
